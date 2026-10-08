@@ -4,17 +4,18 @@ const RED = "#d03a2f";
 const BLUE = "#2f5fd0";
 const GREEN = "#1e9e5a";
 const DEFAULT_WORDS = [
-  ...["(인트로)", "(인터루드)", "(아웃트로)"].map((text) => ({
+  ...["인트로", "인터루드", "아웃트로"].map((text) => ({
     text,
     color: RED,
   })),
-  ...["(건반)", "(신디)", "(기타)", "(베이스)", "(드럼)"].map((text) => ({
+  ...["건반", "신디", "기타", "베이스", "드럼"].map((text) => ({
     text,
     color: BLUE,
   })),
-  ...["(벌스)", "(프리코러스)", "(코러스)", "(브릿지)", "(엔딩)"].map(
-    (text) => ({ text, color: GREEN }),
-  ),
+  ...["벌스", "프리코러스", "코러스", "브릿지", "엔딩"].map((text) => ({
+    text,
+    color: GREEN,
+  })),
 ];
 const PRESET = [
   "#2f5fd0",
@@ -128,7 +129,7 @@ function printAsPdf(html) {
 export default function App() {
   const padRef = useRef(null);
   const saved = useRef(null);
-  const [words, setWords] = useState(() => load("lp.words.v2", DEFAULT_WORDS));
+  const [words, setWords] = useState(() => load("lp.words.v3", DEFAULT_WORDS));
   const [defColor, setDefColor] = useState(() =>
     load("lp.defColor", "#2f5fd0"),
   );
@@ -142,7 +143,7 @@ export default function App() {
   const [editingId, setEditingId] = useState(null);
   const [exportId, setExportId] = useState("draft");
 
-  useEffect(() => store("lp.words.v2", words), [words]);
+  useEffect(() => store("lp.words.v3", words), [words]);
   useEffect(() => store("lp.defColor", defColor), [defColor]);
   useEffect(() => store("lp.tabs", tabs), [tabs]);
   useEffect(() => setExportId(active), [active]);

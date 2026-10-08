@@ -1,42 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
-const BASE = [
-  "벌스",
-  "프리코러스",
-  "코러스",
-  "건반",
-  "신디",
-  "기타",
-  "드럼",
-  "베이스",
-  "보컬",
-  "인트로",
-  "인터루드",
-  "아웃트로",
-  "브릿지",
-  "엔딩",
-  "후렴",
-  "간주",
+const RED = "#d03a2f";
+const BLUE = "#2f5fd0";
+const GREEN = "#1e9e5a";
+const DEFAULT_WORDS = [
+  ...["(인트로)", "(인터루드)", "(아웃트로)"].map((text) => ({
+    text,
+    color: RED,
+  })),
+  ...["(건반)", "(신디)", "(기타)", "(베이스)", "(드럼)"].map((text) => ({
+    text,
+    color: BLUE,
+  })),
+  ...["(벌스)", "(프리코러스)", "(코러스)", "(브릿지)", "(엔딩)"].map(
+    (text) => ({ text, color: GREEN }),
+  ),
 ];
-const COLOR_BY_TEXT = {
-  인트로: "#d03a2f",
-  인터루드: "#d03a2f",
-  아웃트로: "#d03a2f",
-  건반: "#2f5fd0",
-  신디: "#2f5fd0",
-  기타: "#2f5fd0",
-  베이스: "#2f5fd0",
-  드럼: "#2f5fd0",
-  벌스: "#1e9e5a",
-  프리코러스: "#1e9e5a",
-  코러스: "#1e9e5a",
-  브릿지: "#1e9e5a",
-  엔딩: "#1e9e5a",
-};
-const DEFAULT_WORDS = BASE.map((text) => ({
-  text,
-  color: COLOR_BY_TEXT[text] ?? "#2f5fd0",
-}));
 const PRESET = [
   "#2f5fd0",
   "#d03a2f",
@@ -149,7 +128,7 @@ function printAsPdf(html) {
 export default function App() {
   const padRef = useRef(null);
   const saved = useRef(null);
-  const [words, setWords] = useState(() => load("lp.words", DEFAULT_WORDS));
+  const [words, setWords] = useState(() => load("lp.words.v2", DEFAULT_WORDS));
   const [defColor, setDefColor] = useState(() =>
     load("lp.defColor", "#2f5fd0"),
   );
@@ -163,7 +142,7 @@ export default function App() {
   const [editingId, setEditingId] = useState(null);
   const [exportId, setExportId] = useState("draft");
 
-  useEffect(() => store("lp.words", words), [words]);
+  useEffect(() => store("lp.words.v2", words), [words]);
   useEffect(() => store("lp.defColor", defColor), [defColor]);
   useEffect(() => store("lp.tabs", tabs), [tabs]);
   useEffect(() => setExportId(active), [active]);
@@ -363,7 +342,7 @@ export default function App() {
 
   return (
     <main>
-      <h1>리드시트 메모장</h1>
+      <h1>🎹 단어 박스 메모장</h1>
 
       <div className="tabs">
         <button

@@ -1,19 +1,42 @@
 import { useEffect, useRef, useState } from "react";
 
 const BASE = [
+  "벌스",
+  "프리코러스",
   "코러스",
   "건반",
+  "신디",
   "기타",
   "드럼",
   "베이스",
   "보컬",
   "인트로",
+  "인터루드",
   "아웃트로",
   "브릿지",
+  "엔딩",
   "후렴",
   "간주",
 ];
-const DEFAULT_WORDS = BASE.map((text) => ({ text, color: "#2f5fd0" }));
+const COLOR_BY_TEXT = {
+  인트로: "#d03a2f",
+  인터루드: "#d03a2f",
+  아웃트로: "#d03a2f",
+  건반: "#2f5fd0",
+  신디: "#2f5fd0",
+  기타: "#2f5fd0",
+  베이스: "#2f5fd0",
+  드럼: "#2f5fd0",
+  벌스: "#1e9e5a",
+  프리코러스: "#1e9e5a",
+  코러스: "#1e9e5a",
+  브릿지: "#1e9e5a",
+  엔딩: "#1e9e5a",
+};
+const DEFAULT_WORDS = BASE.map((text) => ({
+  text,
+  color: COLOR_BY_TEXT[text] ?? "#2f5fd0",
+}));
 const PRESET = [
   "#2f5fd0",
   "#d03a2f",
